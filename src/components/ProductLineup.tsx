@@ -5,49 +5,42 @@ import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
 import ProductCard, { ProductCardData } from './ProductCard';
 
-// 제품 데이터
+// 프로젝트 데이터
 const products: ProductCardData[] = [
     {
-        id: 'cardiovascular-1',
-        title: 'CETNUM™',
-        category: 'Cardiovascular',
-        description: '오스템바스큘라만의 독자적인 기술력으로 설계한 약물방출관상동맥용스텐트, PTCA 풍선카테터 등 혁신적인 심혈관 의료기기 제품을 공급합니다.',
-        link: '#cardiovascular',
+        id: 'ifrsseed',
+        title: 'IFRSseed',
+        category: 'ESG · AI · 배포중',
+        description: 'LangGraph 기반 RAG로 지속가능경영보고서를 자동 생성하는 ESG 플랫폼. IFRS·GRI·ESRS 기준 대응, GHG Protocol Scope 1/2/3 산정, CDP 응답, Smart Draft(AI 문단 생성)를 제공합니다. (bge-m3 임베딩 · pgvector · AWS EC2 GPU)',
+        link: 'https://www.ifrsseed.site/',
     },
     {
-        id: 'cardiovascular-2',
-        title: 'OPTIMA',
-        category: 'Cardiovascular',
-        description: '최첨단 기술로 개발된 심혈관 치료 솔루션으로 의료진과 환자에게 최적의 치료 옵션을 제공합니다.',
-        link: '#cardiovascular',
+        id: 'reseed',
+        title: 'RE:SEED',
+        category: 'Renewable Energy · AI',
+        description: 'RE100·재생에너지 MRV를 위한 멀티 에이전트 AI 플랫폼. LangGraph(StateGraph·MemorySaver)와 Score Function, KEPCO·SMP API 연동, Redis(Upstash) 캐싱과 APScheduler 자동화로 구성했습니다.',
+        link: 'https://github.com/yeotaeho/reseed',
     },
     {
-        id: 'cardiovascular-3',
-        title: 'INJET',
-        category: 'Cardiovascular',
-        description: '정밀한 설계와 우수한 품질로 신뢰할 수 있는 심혈관 의료기기를 제공합니다.',
-        link: '#cardiovascular',
+        id: 'clickme',
+        title: 'ClickMe',
+        category: 'MarTech · AI',
+        description: '가상 소비자 페르소나로 광고 성과(구매 의도)를 사전 예측하는 플랫폼. Next.js + FastAPI + LangGraph, GPT-4o Vision·Gemini 2.0 Flash, NeonDB(pgvector), AWS SQS/S3 기반으로 구현했습니다.',
+        link: 'https://github.com/cclickstudio/click-me',
     },
     {
-        id: 'neurovascular-1',
-        title: 'Neurovascular Products',
-        category: 'Neurovascular',
-        description: 'Balt Group과의 글로벌 파트너십을 통해 뇌혈관 질환 치료를 위한 세계적인 수준의 의료기기를 소개합니다.',
-        link: '#neurovascular',
+        id: 'roadmap',
+        title: 'Roadmap',
+        category: 'Career · AI',
+        description: '글로벌 트렌드 분석으로 개인 역량 로드맵을 제시하는 AI 커리어 내비게이터. Llama-3.1-8B-Bllossom(QLoRA) 파인튜닝, 시계열 트랜스포머, pgvector, Flutter/Dart로 개발 중입니다.',
+        link: 'https://github.com/yeotaeho/roadmap',
     },
     {
-        id: 'accessories-1',
-        title: 'Balloon Expander',
-        category: 'Accessories',
-        description: '혈관 중재 시술에 필수적인 풍선확장기 등 다양한 의료기기를 개발 및 공급합니다.',
-        link: '#accessories',
-    },
-    {
-        id: 'accessories-2',
-        title: 'Hemostatic Valve',
-        category: 'Accessories',
-        description: '안전하고 신뢰할 수 있는 지혈밸브로 시술의 안정성을 보장합니다.',
-        link: '#accessories',
+        id: 'web-portfolio',
+        title: 'Web Portfolio',
+        category: 'Frontend · Web',
+        description: 'React·TypeScript·반응형 웹 등 프론트엔드 퍼블리싱 작업 모음(MLB, Taste.it, 교보문go 등). 웹 개발의 기초를 다진 초기 작업들을 정리했습니다.',
+        link: 'https://blog.yeotaeho.kr/PORTFOLIO/',
     },
 ];
 
@@ -61,7 +54,7 @@ const ProductLineup: React.FC = () => {
     });
 
     return (
-        <section id="products" className="py-20 lg:py-32 bg-white">
+        <section id="projects" className="py-20 lg:py-32 bg-white">
             <div className="container mx-auto px-6 lg:px-10">
                 {/* 섹션 헤더 */}
                 <motion.div
@@ -72,10 +65,10 @@ const ProductLineup: React.FC = () => {
                     className="text-center mb-16"
                 >
                     <h2 className="text-4xl lg:text-5xl font-extrabold text-gray-900 mb-4">
-                        PRODUCT LINE UP
+                        PROJECTS
                     </h2>
                     <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                        오스템바스큘라만의 독자적인 기술력으로 설계한 혁신적인 의료기기 제품을 소개합니다.
+                        직접 기획·개발하고 배포·운영까지 완성한 프로젝트들입니다.
                     </p>
                 </motion.div>
 

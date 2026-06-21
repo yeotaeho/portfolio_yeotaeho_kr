@@ -29,5 +29,17 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+
+  /* 인트로 타이핑 커서 깜빡임 */
+  @keyframes intro-blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+  }
+  .intro-cursor {
+    animation: intro-blink 1s steps(1) infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .intro-cursor { animation: none; opacity: 1; }
+  }
 }
 

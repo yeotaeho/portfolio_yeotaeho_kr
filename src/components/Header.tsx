@@ -4,14 +4,14 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { HiMenu, HiX } from 'react-icons/hi';
 
-// 메뉴 항목 정의 (osstemvascular.com 스타일)
-const menuItems: string[] = ["개인프로젝트", "COMPANY", "NEWS", "CONTACT"];
+// 메뉴 항목 정의
+const menuItems: string[] = ["ABOUT", "PROJECTS", "BLOG", "CONTACT"];
 
 // 메뉴 항목과 경로 매핑
 const menuItemPaths: Record<string, string> = {
-    "개인프로젝트": "http://localhost:3000",
-    "COMPANY": "#company",
-    "NEWS": "#news",
+    "ABOUT": "#about",
+    "PROJECTS": "#projects",
+    "BLOG": "#blog",
     "CONTACT": "#contact"
 };
 
@@ -29,7 +29,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
                 {/* 헤더 */}
                 <div className="flex justify-between items-center px-6 py-5 border-b border-gray-100">
                     <div className="text-xl font-bold tracking-tight">
-                        OSSTEM<span className="text-orange-600">VASCULAR</span>
+                        YEO<span className="text-orange-600">TAEHO</span>
                     </div>
                     <button
                         onClick={onClose}
@@ -63,16 +63,16 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
                 {/* 하단 버튼들 */}
                 <div className="px-6 py-6 border-t border-gray-100 space-y-4">
                     <a
-                        href="#contact"
+                        href="mailto:tkakrrl1234@gmail.com"
                         onClick={onClose}
                         className="block w-full px-4 py-3 text-center text-sm border border-gray-900 rounded-md hover:bg-gray-100 transition duration-150 font-medium"
                     >
-                        제품문의/견적
+                        이메일 보내기
                     </a>
-                    <div className="flex justify-center text-sm font-medium">
-                        <span className="text-black font-semibold">KR</span>
-                        <span className="text-gray-400"> / </span>
-                        <a href="#" className="text-gray-400 hover:text-black">EN</a>
+                    <div className="flex justify-center space-x-4 text-sm font-medium">
+                        <a href="https://github.com/yeotaeho" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-black">GitHub</a>
+                        <span className="text-gray-300">·</span>
+                        <a href="https://velog.io/@wp187133/posts" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-black">Velog</a>
                     </div>
                 </div>
             </div>
@@ -89,9 +89,9 @@ const Header: React.FC = () => {
     return (
         <>
             <header className="flex justify-between items-center px-6 lg:px-10 py-5 h-20 border-b border-gray-100 shadow-sm sticky top-0 bg-white z-50">
-                {/* 로고 (Osstem Vascular) */}
+                {/* 로고 */}
                 <Link href="/" className="text-xl font-bold tracking-tight">
-                    OSSTEM<span className="text-orange-600">VASCULAR</span>
+                    YEO<span className="text-orange-600">TAEHO</span>
                 </Link>
 
                 {/* 메인 메뉴 (데스크톱) */}
@@ -116,15 +116,15 @@ const Header: React.FC = () => {
                 {/* 오른쪽 섹션 (문의 버튼 및 언어 스위치) */}
                 <div className="flex items-center space-x-4 lg:space-x-5">
                     <a
-                        href="#contact"
+                        href="mailto:tkakrrl1234@gmail.com"
                         className="hidden md:block px-4 py-2 text-xs border border-gray-900 rounded-md hover:bg-gray-100 transition duration-150 font-medium shadow-sm"
                     >
-                        제품문의/견적
+                        이메일 보내기
                     </a>
-                    <div className="hidden lg:flex text-sm font-medium">
-                        <span className="text-black font-semibold">KR</span>
-                        <span className="text-gray-400"> / </span>
-                        <a href="#" className="text-gray-400 hover:text-black">EN</a>
+                    <div className="hidden lg:flex space-x-3 text-sm font-medium">
+                        <a href="https://github.com/yeotaeho" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-black">GitHub</a>
+                        <span className="text-gray-300">·</span>
+                        <a href="https://velog.io/@wp187133/posts" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-black">Velog</a>
                     </div>
                     {/* 모바일 메뉴 버튼 */}
                     <button

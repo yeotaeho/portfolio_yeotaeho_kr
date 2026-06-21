@@ -3,7 +3,6 @@
 import React from 'react';
 import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
-import Link from 'next/link';
 
 export interface NewsArticle {
     id: string;
@@ -17,31 +16,37 @@ interface NewsSectionProps {
     news?: NewsArticle[];
 }
 
-// 기본 뉴스 데이터
+// 블로그 주제 (Velog로 연결)
+const VELOG_URL = 'https://velog.io/@wp187133/posts';
+
 const defaultNews: NewsArticle[] = [
     {
         id: '1',
-        date: '2025.12.22',
-        title: '[PRESS RELEASE] 오스템바스큘라, 웹어워드 코리아 2025 의료기기 분야 대상 수상',
-        description: '혈관 의료기기 전문성과 사용자 편의를 반영한 웹사이트 전면 개편',
+        date: 'LangGraph',
+        title: 'LangGraph로 멀티 에이전트 오케스트레이션 설계하기',
+        description: 'StateGraph·MemorySaver, 조건 분기와 Score Function 기반 의사결정 등 에이전트 워크플로 구현 경험을 정리합니다.',
+        link: VELOG_URL,
     },
     {
         id: '2',
-        date: '2025.11.24',
-        title: '「오스템바스큘라」 홈페이지 리뉴얼!',
-        description: '회사 및 제품에 정보 및 소식을 보다 정확하게 안내해 드리고자 합니다.',
+        date: 'RAG',
+        title: 'RAG 파이프라인 구축과 환각(Hallucination) 줄이기',
+        description: 'bge-m3 임베딩과 pgvector 하이브리드 검색, 검증 단계 추가 등 신뢰할 수 있는 RAG를 만드는 과정을 기록합니다.',
+        link: VELOG_URL,
     },
     {
         id: '3',
-        date: '2025.07.14',
-        title: 'CENTUM Registry 임상 결과 KCJ 게재',
-        description: 'CENTUM에 대한 최신 Registry 임상시험 결과가 SICE급 국제 학술 저널인 KCJ에 게재되었습니다.',
+        date: 'Backend',
+        title: 'FastAPI · PostgreSQL 비동기 백엔드 트러블슈팅',
+        description: '비동기 DB 연결, 타임아웃·캐싱(Redis) 최적화, Alembic 마이그레이션에서 마주친 문제와 해결 과정을 다룹니다.',
+        link: VELOG_URL,
     },
     {
         id: '4',
-        date: '2025.05.01',
-        title: '새로운 PTCA 풍선카테터, BeMotion 시리즈 출시',
-        description: '국내에서 직접 제조하는 새로운 PTCA 풍선카테터를 출시하였습니다.',
+        date: 'DevOps',
+        title: 'AWS EC2(GPU)에 CI/CD로 AI 서비스 배포하기',
+        description: 'GitHub Actions·systemd·Nginx·Certbot으로 AI 서비스를 실제 운영 환경에 배포하고 운영한 경험을 공유합니다.',
+        link: VELOG_URL,
     },
 ];
 
@@ -55,7 +60,7 @@ const NewsSection: React.FC<NewsSectionProps> = ({ news = defaultNews }) => {
     });
 
     return (
-        <section id="news" className="py-20 lg:py-32 bg-white">
+        <section id="blog" className="py-20 lg:py-32 bg-white">
             <div className="container mx-auto px-6 lg:px-10">
                 {/* 섹션 헤더 */}
                 <motion.div
@@ -66,10 +71,10 @@ const NewsSection: React.FC<NewsSectionProps> = ({ news = defaultNews }) => {
                     className="text-center mb-16"
                 >
                     <h2 className="text-4xl lg:text-5xl font-extrabold text-gray-900 mb-4">
-                        NEWS
+                        BLOG
                     </h2>
                     <p className="text-lg text-gray-600">
-                        오스템바스큘라의 새로운 소식을 알려드립니다.
+                        개발하며 배우고 정리한 기록들을 Velog에 남깁니다.
                     </p>
                 </motion.div>
 
@@ -84,7 +89,7 @@ const NewsSection: React.FC<NewsSectionProps> = ({ news = defaultNews }) => {
                             className="border-b border-gray-200 pb-8 hover:border-orange-600 transition-colors"
                         >
                             {article.link ? (
-                                <Link href={article.link} className="block group">
+                                <a href={article.link} target="_blank" rel="noopener noreferrer" className="block group">
                                     <div className="text-sm text-gray-500 mb-2">{article.date}</div>
                                     <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-orange-600 transition-colors">
                                         {article.title}
@@ -94,7 +99,7 @@ const NewsSection: React.FC<NewsSectionProps> = ({ news = defaultNews }) => {
                                             {article.description}
                                         </p>
                                     )}
-                                </Link>
+                                </a>
                             ) : (
                                 <div>
                                     <div className="text-sm text-gray-500 mb-2">{article.date}</div>
@@ -120,10 +125,12 @@ const NewsSection: React.FC<NewsSectionProps> = ({ news = defaultNews }) => {
                     className="text-center mt-12"
                 >
                     <a
-                        href="#news"
+                        href={VELOG_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="inline-block px-6 py-3 border border-gray-900 rounded-md hover:bg-gray-100 transition duration-150 font-medium"
                     >
-                        뉴스 더보기
+                        Velog에서 더보기
                     </a>
                 </motion.div>
             </div>

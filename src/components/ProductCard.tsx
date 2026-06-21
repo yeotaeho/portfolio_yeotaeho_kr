@@ -44,7 +44,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, index }) => {
                     />
                 ) : (
                     <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200">
-                        <span className="text-gray-400 text-4xl">🏥</span>
+                        <span className="text-2xl font-extrabold tracking-tight text-gray-400">{product.title}</span>
                     </div>
                 )}
             </div>
@@ -68,6 +68,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, index }) => {
     );
 
     if (product.link) {
+        const isExternal = /^https?:\/\//.test(product.link);
+        if (isExternal) {
+            return (
+                <a href={product.link} target="_blank" rel="noopener noreferrer" className="block">
+                    {cardContent}
+                </a>
+            );
+        }
         return (
             <Link href={product.link} className="block">
                 {cardContent}

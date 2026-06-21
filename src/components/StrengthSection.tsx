@@ -15,24 +15,24 @@ const StrengthSection: React.FC = () => {
 
     const strengths = [
         {
-            title: 'Since 1994',
-            subtitle: '개발부터 제조까지',
-            description: '모든 것을 스스로 이뤄내다',
+            title: 'AI · LLM',
+            subtitle: 'LangGraph · LangChain · RAG',
+            description: '에이전트 오케스트레이션과 검색증강생성(RAG)으로 신뢰할 수 있는 AI 서비스를 설계합니다. (pgvector · bge-m3 · PyTorch)',
         },
         {
-            title: 'MISSION',
-            subtitle: '삶의 질 향상에 기여하는',
-            description: '혈관 의료기기 전문기업',
+            title: 'Backend',
+            subtitle: 'Python · FastAPI · PostgreSQL',
+            description: '비동기 API, pgvector 임베딩, SQLAlchemy·Alembic 마이그레이션 기반의 안정적인 데이터 파이프라인을 구축합니다.',
         },
         {
-            title: 'VISION',
-            subtitle: '혈관 질환 치료에 필요한 토탈 솔루션을',
-            description: '제공하여 보다 나은 미래 가치 창출',
+            title: 'DevOps',
+            subtitle: 'AWS · Docker · GitHub Actions',
+            description: 'EC2(GPU)·Nginx·systemd 위에 CI/CD를 구성해 기획한 서비스를 실제 운영 환경까지 직접 배포합니다.',
         },
     ];
 
     return (
-        <section id="company" className="py-20 lg:py-32 bg-gray-50">
+        <section id="about" className="py-20 lg:py-32 bg-gray-50">
             <div className="container mx-auto px-6 lg:px-10">
                 <motion.div
                     ref={ref}
@@ -42,8 +42,11 @@ const StrengthSection: React.FC = () => {
                     className="text-center mb-16"
                 >
                     <h2 className="text-4xl lg:text-5xl font-extrabold text-gray-900 mb-4">
-                        STRENGTH
+                        ABOUT
                     </h2>
+                    <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                        아이디어를 실제 서비스로 끝까지 완성하는 AI·풀스택 엔지니어입니다.
+                    </p>
                 </motion.div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
@@ -76,11 +79,11 @@ const StrengthSection: React.FC = () => {
                     className="mt-16 text-center"
                 >
                     <h3 className="text-2xl lg:text-3xl font-extrabold text-gray-900 mb-6">
-                        INNOVATIVE VASCULAR SOLUTIONS THAT GO BEYOND
+                        BUILDING RELIABLE AI SERVICES
                     </h3>
                     <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                        지속적 연구개발과 제조 노하우, 철저한 품질관리를 통해 신뢰할 수 있는 제품과 솔루션을 제공하며
-                        혈관 질환 치료의 새로운 길을 열어가고자 합니다.
+                        LLM·RAG를 활용해 ESG, 재생에너지, 마케팅 등 다양한 도메인의 문제를 해결하고,
+                        FastAPI 백엔드부터 AWS 배포·운영까지 직접 책임지며 끝까지 동작하는 서비스를 만듭니다.
                     </p>
                 </motion.div>
             </div>

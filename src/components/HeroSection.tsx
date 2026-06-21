@@ -12,50 +12,55 @@ const heroSlides = [
         id: 1,
         koreanText: (
             <>
-                국내외 의료진, <br />
-                <span className="font-semibold text-orange-600">글로벌 파트너</span>와 함께 <br />
-                <span className="font-semibold text-orange-600">지속적</span>으로 <span className="font-semibold text-orange-600">성장</span>
+                아이디어를 <span className="font-semibold text-orange-600">실제 서비스</span>로, <br />
+                도전과 경험으로 <span className="font-semibold text-orange-600">성장</span>하는 <br />
+                <span className="font-semibold text-orange-600">AI 엔지니어</span> 여태호입니다
             </>
         ),
-        englishTitle: "GROWING\nTOGETHER",
-        subtitle: "TOTAL SOLUTION PROVIDER",
-        image: "/images/hFMPkHA_HZ2sBDwAQf0Pk6rKscxJiJ5Ry4AtbAlrpFyvZmiwSgaF6vxQcso8kmG_yq4UC9gmBUgADkEIrZgb-w.webp",
-        imageAlt: "Growing Together - Global Partners",
+        englishTitle: "BUILD\n& DEPLOY",
+        subtitle: "AI · LLM ENGINEER",
+        image: "/images/award-sesac.jpg",
+        imageAlt: "2025 새싹(SeSAC) 해커톤 장려상 수상 - 여태호",
     },
     {
         id: 2,
         koreanText: (
             <>
-                약물방출관상동맥용스텐트, <br />
-                PTCA 풍선카테터 <br />
-                <span className="font-semibold text-orange-600">최초로 국산화</span>
+                LangGraph 기반 <span className="font-semibold text-orange-600">RAG</span>로 <br />
+                ESG·에너지 도메인의 <br />
+                <span className="font-semibold text-orange-600">복잡한 문제</span>를 풀어냅니다
             </>
         ),
-        englishTitle: "THE WAY\nOF THE PIONEER",
-        subtitle: "",
-        image: "/images/9791194587200.jpg",
-        imageAlt: "The Way of the Pioneer - First Domestic Production",
+        englishTitle: "AI THAT\nSOLVES",
+        subtitle: "LANGGRAPH · RAG",
+        image: "/images/badge-esgseed.jpg",
+        imageAlt: "2025 AI 인재 페스티벌 ESGseed 팀 참가 뱃지",
     },
     {
         id: 3,
         koreanText: (
             <>
-                독자적 기술력과 품질로 <br />
-                혈관 질환 환자의 <br />
-                <span className="font-semibold text-orange-600">삶의 질 향상</span> 추구
+                기획부터 배포·운영까지 <br />
+                <span className="font-semibold text-orange-600">풀스택</span>으로 <br />
+                끝까지 <span className="font-semibold text-orange-600">완성</span>합니다
             </>
         ),
-        englishTitle: "INNOVATIVE\nVASCULAR SOLUTIONS",
-        subtitle: "THAT GO BEYOND",
-        image: "/images/hFMPkHA_HZ2sBDwAQf0Pk6rKscxJiJ5Ry4AtbAlrpFyvZmiwSgaF6vxQcso8kmG_yq4UC9gmBUgADkEIrZgb-w.webp",
-        imageAlt: "Innovative Vascular Solutions",
+        englishTitle: "END\nTO END",
+        subtitle: "FULL STACK DEVELOPER",
+        image: "/images/resume.png",
+        imageAlt: "여태호 이력서",
     },
 ];
+
+interface HeroSectionProps {
+    /** 인트로 오버레이가 떠 있는 동안 true. 인트로가 끝나면 false가 되며 autoplay를 깨끗하게 재시작한다. */
+    introActive?: boolean;
+}
 
 /**
  * 히어로 섹션 컴포넌트 (각 섹션이 독립적으로 움직이는 3개의 Swiper)
  */
-const HeroSection: React.FC = () => {
+const HeroSection: React.FC<HeroSectionProps> = ({ introActive = false }) => {
     const [koreanSwiper, setKoreanSwiper] = useState<SwiperType | null>(null);
     const [englishSwiper, setEnglishSwiper] = useState<SwiperType | null>(null);
     const [imageSwiper, setImageSwiper] = useState<SwiperType | null>(null);
@@ -64,7 +69,7 @@ const HeroSection: React.FC = () => {
     const progressIntervalRef = useRef<number | null>(null);
     const progressStartTimeRef = useRef<number>(0);
 
-    const AUTOPLAY_DELAY = 5000;
+    const AUTOPLAY_DELAY = 4300;
     const TRANSITION_SPEED = 800;
     const TOTAL_DURATION = AUTOPLAY_DELAY + TRANSITION_SPEED;
 
@@ -112,6 +117,28 @@ const HeroSection: React.FC = () => {
         };
     }, [activeIndex]);
 
+    // 인트로가 히어로 위를 덮는 동안 autoplay가 stuck/desync 상태에 빠지므로,
+    // 인트로 동안에는 autoplay를 멈추고, 인트로가 끝나면 3개 Swiper를 0번 슬라이드로
+    // 재동기화한 뒤 autoplay를 깨끗하게 재시작한다.
+    useEffect(() => {
+        const swipers = [koreanSwiper, englishSwiper, imageSwiper].filter(
+            (s): s is SwiperType => !!s && !s.destroyed
+        );
+        if (swipers.length < 3) return;
+
+        if (introActive) {
+            swipers.forEach((sw) => sw.autoplay?.stop());
+        } else {
+            swipers.forEach((sw) => {
+                sw.slideToLoop?.(0, 0);
+                sw.autoplay?.stop();
+                sw.autoplay?.start();
+            });
+            setActiveIndex(0);
+            resetProgress();
+        }
+    }, [introActive, koreanSwiper, englishSwiper, imageSwiper]);
+
     const goPrev = () => {
         if (koreanSwiper) koreanSwiper.slidePrev();
         if (englishSwiper) englishSwiper.slidePrev();
@@ -138,7 +165,7 @@ const HeroSection: React.FC = () => {
                             onSwiper={setKoreanSwiper}
                             onSlideChange={handleKoreanSlideChange}
                             autoplay={{
-                                delay: 5000,
+                                delay: AUTOPLAY_DELAY,
                                 disableOnInteraction: false,
                             }}
                             speed={800}
@@ -173,7 +200,7 @@ const HeroSection: React.FC = () => {
                             onSwiper={setEnglishSwiper}
                             onSlideChange={handleEnglishSlideChange}
                             autoplay={{
-                                delay: 5000,
+                                delay: AUTOPLAY_DELAY,
                                 disableOnInteraction: false,
                             }}
                             speed={800}
@@ -215,7 +242,7 @@ const HeroSection: React.FC = () => {
                         onSwiper={setImageSwiper}
                         onSlideChange={handleImageSlideChange}
                         autoplay={{
-                            delay: 5000,
+                            delay: AUTOPLAY_DELAY,
                             disableOnInteraction: false,
                         }}
                         speed={800}
