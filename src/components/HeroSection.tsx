@@ -52,6 +52,11 @@ const heroSlides = [
     },
 ];
 
+// 사진 가장자리·꼭짓점을 흰 배경으로 부드럽게 페이드아웃시키는 방사형 마스크
+// (가운데가 가장 진하고 모서리·꼭짓점으로 갈수록 투명)
+const IMAGE_FADE =
+    'radial-gradient(ellipse 58% 62% at 50% 50%, #000 20%, rgba(0,0,0,0.5) 55%, transparent 100%)';
+
 interface HeroSectionProps {
     /** 인트로 오버레이가 떠 있는 동안 true. 인트로가 끝나면 false가 되며 autoplay를 깨끗하게 재시작한다. */
     introActive?: boolean;
@@ -175,7 +180,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ introActive = false }) => {
                         >
                             {heroSlides.map((slide) => (
                                 <SwiperSlide key={`korean-${slide.id}`}>
-                                    <div className="text-2xl sm:text-3xl lg:text-4xl font-light leading-relaxed tracking-tight">
+                                    <div className="text-2xl sm:text-3xl lg:text-[48px]/[64px] font-light leading-relaxed tracking-tight">
                                         {typeof slide.koreanText === 'string'
                                             ? (slide.koreanText as string).split('\n').map((line: string, index: number) => (
                                                 <React.Fragment key={index}>
@@ -218,7 +223,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ introActive = false }) => {
                                             </p>
                                         )}
                                         {/* 영문 헤드라인 */}
-                                        <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold leading-none tracking-tighter">
+                                        <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-[178px] font-extrabold leading-none tracking-tighter">
                                             {slide.englishTitle.split('\n').map((line: string, index: number) => (
                                                 <React.Fragment key={index}>
                                                     {index > 0 && <br />}
@@ -254,18 +259,18 @@ const HeroSection: React.FC<HeroSectionProps> = ({ introActive = false }) => {
                         {heroSlides.map((slide) => (
                             <SwiperSlide key={`image-${slide.id}`}>
                                 {slide.image ? (
-                                    <>
-                                        <Image
-                                            src={slide.image}
-                                            alt={slide.imageAlt || slide.englishTitle}
-                                            fill
-                                            className="object-contain"
-                                            priority
-                                            sizes="50vw"
-                                        />
-                                        {/* 오버레이 */}
-                                        <div className="absolute inset-0 bg-white/5 z-20"></div>
-                                    </>
+                                    <Image
+                                        src={slide.image}
+                                        alt={slide.imageAlt || slide.englishTitle}
+                                        fill
+                                        className="object-contain"
+                                        priority
+                                        sizes="50vw"
+                                        style={{
+                                            WebkitMaskImage: IMAGE_FADE,
+                                            maskImage: IMAGE_FADE,
+                                        }}
+                                    />
                                 ) : (
                                     <div className="absolute inset-0 bg-white p-20 flex flex-col space-y-4">
                                         {/* 플레이스홀더 디자인 */}

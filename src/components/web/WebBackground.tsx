@@ -37,18 +37,49 @@ const WebBackground: React.FC = () => {
 
         const reducedMQ = window.matchMedia('(prefers-reduced-motion: reduce)');
 
+        // 가장자리 가중치: 가운데=0, 가장자리 띠 안=1 (꼭짓점은 두 변 겹쳐 자동 최강)
+        const band = () => Math.min(w, h) * WEB.EDGE_BAND_FRAC;
+        const edgeWeight = (x: number, y: number) => {
+            const d = Math.min(x, w - x, y, h - y);
+            return 1 - Math.min(d / band(), 1);
+        };
+        // 가운데 CENTER_MUL(옅게) → 가장자리 EDGE_ALPHA_MUL 배
+        const edgeMul = (x: number, y: number) =>
+            WEB.CENTER_MUL + (WEB.EDGE_ALPHA_MUL - WEB.CENTER_MUL) * edgeWeight(x, y);
+
+        const makeNode = (x: number, y: number): WebNode => ({
+            x,
+            y,
+            vx: (Math.random() * 2 - 1) * WEB.DRIFT,
+            vy: (Math.random() * 2 - 1) * WEB.DRIFT,
+            r: 1 + Math.random() * 0.6,
+        });
+
         const seed = () => {
-            const target = Math.max(
+            const base = Math.max(
                 WEB.MIN_NODES,
                 Math.min(WEB.MAX_NODES, Math.round((w * h) / WEB.AREA_PER_NODE))
             );
-            nodes = Array.from({ length: target }, () => ({
-                x: Math.random() * w,
-                y: Math.random() * h,
-                vx: (Math.random() * 2 - 1) * WEB.DRIFT,
-                vy: (Math.random() * 2 - 1) * WEB.DRIFT,
-                r: 1 + Math.random() * 0.6,
-            }));
+            // 가운데 밀도 유지용 균일 노드
+            const next: WebNode[] = Array.from({ length: base }, () =>
+                makeNode(Math.random() * w, Math.random() * h)
+            );
+
+            // 가장자리 띠 안에만 추가 노드 (꼭짓점은 두 변에 걸쳐 자동으로 더 촘촘)
+            const extra = Math.min(
+                Math.round(base * WEB.EDGE_EXTRA_RATIO),
+                WEB.MAX_TOTAL - next.length
+            );
+            const b = band();
+            for (let i = 0; i < extra; i++) {
+                const side = Math.floor(Math.random() * 4);
+                if (side === 0) next.push(makeNode(Math.random() * w, Math.random() * b)); // 상
+                else if (side === 1) next.push(makeNode(Math.random() * w, h - Math.random() * b)); // 하
+                else if (side === 2) next.push(makeNode(Math.random() * b, Math.random() * h)); // 좌
+                else next.push(makeNode(w - Math.random() * b, Math.random() * h)); // 우
+            }
+
+            nodes = next;
         };
 
         const resize = () => {
@@ -75,8 +106,11 @@ const WebBackground: React.FC = () => {
                     const dy = a.y - b.y;
                     const d = Math.hypot(dx, dy);
                     if (d < WEB.LINK_R) {
-                        ctx.strokeStyle = `rgba(0,0,0,${(1 - d / WEB.LINK_R) * WEB.BASE_ALPHA})`;
-                        ctx.lineWidth = 1;
+                        // 실의 중점 기준 가장자리 가중치 적용
+                        const ew = edgeWeight((a.x + b.x) / 2, (a.y + b.y) / 2);
+                        const mul = WEB.CENTER_MUL + (WEB.EDGE_ALPHA_MUL - WEB.CENTER_MUL) * ew;
+                        ctx.strokeStyle = `rgba(0,0,0,${(1 - d / WEB.LINK_R) * WEB.BASE_ALPHA * mul})`;
+                        ctx.lineWidth = 1 + WEB.EDGE_WIDTH_BOOST * ew;
                         ctx.beginPath();
                         ctx.moveTo(a.x, a.y);
                         ctx.lineTo(b.x, b.y);
@@ -118,7 +152,8 @@ const WebBackground: React.FC = () => {
                     ctx.arc(a.x, a.y, a.r + 1.2, 0, Math.PI * 2);
                     ctx.fill();
                 } else {
-                    ctx.fillStyle = `rgba(0,0,0,${WEB.DOT_ALPHA})`;
+                    const dotAlpha = Math.min(WEB.DOT_ALPHA * edgeMul(a.x, a.y), 1);
+                    ctx.fillStyle = `rgba(0,0,0,${dotAlpha})`;
                     ctx.beginPath();
                     ctx.arc(a.x, a.y, a.r, 0, Math.PI * 2);
                     ctx.fill();

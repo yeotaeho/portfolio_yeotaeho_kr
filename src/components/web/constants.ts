@@ -17,4 +17,12 @@ export const WEB = {
     FPS_INTERVAL: 22, // ms (~45fps 게이트)
     DRIFT: 0.06, // 노드 드리프트 속도
     CURSOR_PULL: 0.015, // 커서 끌림 강도
+
+    // 가장자리 강조 (가운데는 옅게, 가장자리·꼭짓점만 더 진하고 촘촘하게)
+    EDGE_BAND_FRAC: 0.22, // 가장자리 띠 폭 = min(w,h) * 이 값
+    EDGE_EXTRA_RATIO: 0.8, // 가장자리 추가 노드 비율 (기본 노드 수 대비)
+    CENTER_MUL: 0.4, // 가운데 실/점 불투명도 배율 (<1: 가운데를 더 옅게)
+    EDGE_ALPHA_MUL: 2.4, // 가장자리에서 실/점 불투명도 최대 배율
+    EDGE_WIDTH_BOOST: 0.5, // 가장자리에서 실 굵기 가산
+    MAX_TOTAL: 150, // 총 노드 상한 (성능 가드)
 } as const;
