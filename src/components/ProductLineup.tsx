@@ -1,9 +1,8 @@
 "use client";
 
 import React from 'react';
-import { useInView } from 'react-intersection-observer';
-import { motion } from 'framer-motion';
 import ProductCard, { ProductCardData } from './ProductCard';
+import SectionHeading from './web/SectionHeading';
 
 // 프로젝트 데이터
 const products: ProductCardData[] = [
@@ -48,32 +47,16 @@ const products: ProductCardData[] = [
  * 제품 라인업 섹션 컴포넌트
  */
 const ProductLineup: React.FC = () => {
-    const [ref, inView] = useInView({
-        triggerOnce: true,
-        threshold: 0.1,
-    });
-
     return (
-        <section id="projects" className="py-20 lg:py-32 bg-white">
+        <section id="projects" className="py-12 lg:py-20">
             <div className="container mx-auto px-6 lg:px-10">
-                {/* 섹션 헤더 */}
-                <motion.div
-                    ref={ref}
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={inView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.6 }}
-                    className="text-center mb-16"
-                >
-                    <h2 className="text-4xl lg:text-5xl font-extrabold text-gray-900 mb-4">
-                        PROJECTS
-                    </h2>
-                    <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                        직접 기획·개발하고 배포·운영까지 완성한 프로젝트들입니다.
-                    </p>
-                </motion.div>
+                <SectionHeading
+                    title="PROJECTS"
+                    subtitle="직접 기획·개발하고 배포·운영까지 완성한 프로젝트들입니다."
+                />
 
                 {/* 제품 그리드 */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {products.map((product, index) => (
                         <ProductCard key={product.id} product={product} index={index} />
                     ))}

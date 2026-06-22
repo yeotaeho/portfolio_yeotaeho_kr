@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { Autoplay } from 'swiper/modules';
 import type { Swiper as SwiperType } from 'swiper';
 import Image from 'next/image';
 
@@ -155,9 +155,9 @@ const HeroSection: React.FC<HeroSectionProps> = ({ introActive = false }) => {
         <section className="relative w-full">
             <div className="flex flex-col lg:flex-row min-h-[calc(100vh-80px)] w-full">
                 {/* 왼쪽 텍스트 섹션 */}
-                <div className="flex flex-col w-full lg:w-1/2 px-6 sm:px-8 lg:px-16 py-8 sm:py-10 lg:py-24 justify-between bg-white relative">
+                <div className="flex flex-col w-full lg:w-1/2 px-6 sm:px-8 lg:px-16 py-6 sm:py-8 lg:py-16 justify-between relative">
                     {/* 한글 텍스트 Swiper */}
-                    <div className="flex-grow pt-10 relative overflow-hidden">
+                    <div className="flex-grow pt-6 relative overflow-hidden">
                         <Swiper
                             modules={[Autoplay]}
                             spaceBetween={0}
@@ -192,7 +192,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ introActive = false }) => {
                     </div>
 
                     {/* 영문 헤드라인 Swiper */}
-                    <div className="mt-16 lg:mt-auto pt-16 relative overflow-hidden">
+                    <div className="mt-10 lg:mt-auto pt-8 relative overflow-hidden">
                         <Swiper
                             modules={[Autoplay]}
                             spaceBetween={0}
@@ -231,6 +231,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ introActive = false }) => {
                             ))}
                         </Swiper>
                     </div>
+
                 </div>
 
                 {/* 오른쪽 이미지 섹션 */}

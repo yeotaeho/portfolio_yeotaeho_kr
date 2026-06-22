@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import SmoothScroll from "@/components/SmoothScroll";
+import WebBackground from "@/components/web/WebBackground";
 
 export const metadata: Metadata = {
   title: "여태호 | AI · LLM Engineer",
@@ -13,7 +15,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body>{children}</body>
+      <body>
+        <WebBackground />
+        <SmoothScroll>{children}</SmoothScroll>
+      </body>
     </html>
   );
 }

@@ -25,7 +25,7 @@ const HomePage: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen antialiased">
+        <div className="relative z-10 min-h-screen antialiased">
             {showIntro && <IntroOverlay onComplete={handleComplete} />}
 
             {/* 인트로 동안 본문 비활성화 */}

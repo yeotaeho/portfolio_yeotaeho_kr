@@ -7,16 +7,10 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 거미줄 컨셉: 항상 흰 배경 고정 (다크모드 미적용) */
 :root {
   --background: #ffffff;
   --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {

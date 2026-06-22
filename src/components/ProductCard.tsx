@@ -30,10 +30,16 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, index }) => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="group relative bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300"
+            className="group relative bg-white/60 rounded-md overflow-hidden border border-black/10 hover:border-black/40 transition-colors duration-300"
         >
+            {/* 모서리 노드 점 */}
+            <span aria-hidden="true" className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-black/40 group-hover:bg-orange-600 transition-colors z-20" />
+            <span aria-hidden="true" className="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-black/40 group-hover:bg-orange-600 transition-colors z-20" />
+            <span aria-hidden="true" className="absolute bottom-0 left-0 -translate-x-1/2 translate-y-1/2 w-2 h-2 rounded-full bg-black/40 group-hover:bg-orange-600 transition-colors z-20" />
+            <span aria-hidden="true" className="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2 w-2 h-2 rounded-full bg-black/40 group-hover:bg-orange-600 transition-colors z-20" />
+
             {/* 이미지 영역 */}
-            <div className="relative w-full h-64 bg-gray-100 overflow-hidden">
+            <div className="relative w-full h-64 bg-gray-50 overflow-hidden border-b border-black/10">
                 {product.image ? (
                     <Image
                         src={product.image}
@@ -63,7 +69,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, index }) => {
             </div>
 
             {/* 호버 오버레이 */}
-            <div className="absolute inset-0 bg-orange-600/0 group-hover:bg-orange-600/5 transition-colors duration-300 pointer-events-none"></div>
+            <div className="absolute inset-0 bg-orange-600/0 group-hover:bg-orange-600/[0.03] transition-colors duration-300 pointer-events-none"></div>
         </motion.div>
     );
 

@@ -3,6 +3,7 @@
 import React from 'react';
 import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
+import SectionHeading from './web/SectionHeading';
 
 /**
  * 회사 강점 섹션 컴포넌트
@@ -32,33 +33,28 @@ const StrengthSection: React.FC = () => {
     ];
 
     return (
-        <section id="about" className="py-20 lg:py-32 bg-gray-50">
+        <section id="about" className="py-12 lg:py-20">
             <div className="container mx-auto px-6 lg:px-10">
-                <motion.div
-                    ref={ref}
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={inView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.6 }}
-                    className="text-center mb-16"
-                >
-                    <h2 className="text-4xl lg:text-5xl font-extrabold text-gray-900 mb-4">
-                        ABOUT
-                    </h2>
-                    <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                        아이디어를 실제 서비스로 끝까지 완성하는 AI·풀스택 엔지니어입니다.
-                    </p>
-                </motion.div>
+                <SectionHeading
+                    title="ABOUT"
+                    subtitle="아이디어를 실제 서비스로 끝까지 완성하는 AI·풀스택 엔지니어입니다."
+                />
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+                <div ref={ref} className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
                     {strengths.map((strength, index) => (
                         <motion.div
                             key={strength.title}
                             initial={{ opacity: 0, y: 30 }}
                             animate={inView ? { opacity: 1, y: 0 } : {}}
                             transition={{ duration: 0.6, delay: index * 0.2 }}
-                            className="text-center"
+                            className="group relative text-center rounded-md border border-black/10 hover:border-black/30 transition-colors bg-white/40 px-6 py-8"
                         >
-                            <h3 className="text-2xl lg:text-3xl font-bold text-orange-600 mb-4">
+                            {/* 노드 점 (카드 상단 중앙) */}
+                            <span
+                                aria-hidden="true"
+                                className="absolute -top-[5px] left-1/2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-black/70 group-hover:bg-orange-600 transition-colors"
+                            />
+                            <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 group-hover:text-orange-600 transition-colors mb-4 mt-1">
                                 {strength.title}
                             </h3>
                             <p className="text-lg font-semibold text-gray-900 mb-2">
@@ -76,7 +72,7 @@ const StrengthSection: React.FC = () => {
                     initial={{ opacity: 0, y: 30 }}
                     animate={inView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.6, delay: 0.6 }}
-                    className="mt-16 text-center"
+                    className="mt-12 text-center"
                 >
                     <h3 className="text-2xl lg:text-3xl font-extrabold text-gray-900 mb-6">
                         BUILDING RELIABLE AI SERVICES
