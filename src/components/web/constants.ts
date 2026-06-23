@@ -12,8 +12,8 @@ export const WEB = {
     CURSOR_ALPHA: 0.18, // 커서 실 최대 불투명도
     DOT_ALPHA: 0.55, // 노드 점 불투명도
     MIN_NODES: 28,
-    MAX_NODES: 90,
-    AREA_PER_NODE: 22000, // 화면 넓이 / 이 값 = 노드 수
+    MAX_NODES: 120, // 캡(2560 이상 초고해상도 헤드룸)
+    AREA_PER_NODE: 41000, // 화면 넓이 / 이 값 = 노드 수 (해상도 무관 동일 밀도: QHD≈90, FHD≈50)
     FPS_INTERVAL: 22, // ms (~45fps 게이트)
     DRIFT: 0.06, // 노드 드리프트 속도
     CURSOR_PULL: 0.015, // 커서 끌림 강도

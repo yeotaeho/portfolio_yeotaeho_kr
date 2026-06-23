@@ -180,7 +180,10 @@ const HeroSection: React.FC<HeroSectionProps> = ({ introActive = false }) => {
                         >
                             {heroSlides.map((slide) => (
                                 <SwiperSlide key={`korean-${slide.id}`}>
-                                    <div className="text-2xl sm:text-3xl lg:text-[48px]/[64px] font-light leading-relaxed tracking-tight">
+                                    <div
+                                        className="font-light tracking-tight"
+                                        style={{ fontSize: 'clamp(22px, 2.5vw, 50px)', lineHeight: 1.35 }}
+                                    >
                                         {typeof slide.koreanText === 'string'
                                             ? (slide.koreanText as string).split('\n').map((line: string, index: number) => (
                                                 <React.Fragment key={index}>
@@ -223,7 +226,10 @@ const HeroSection: React.FC<HeroSectionProps> = ({ introActive = false }) => {
                                             </p>
                                         )}
                                         {/* 영문 헤드라인 */}
-                                        <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-[178px] font-extrabold leading-none tracking-tighter">
+                                        <h1
+                                            className="font-extrabold leading-none tracking-tighter"
+                                            style={{ fontSize: 'clamp(56px, 7.2vw, 178px)' }}
+                                        >
                                             {slide.englishTitle.split('\n').map((line: string, index: number) => (
                                                 <React.Fragment key={index}>
                                                     {index > 0 && <br />}
